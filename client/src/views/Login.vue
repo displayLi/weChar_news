@@ -46,6 +46,7 @@ export default {
         this.$axios.post("/login", this.user).then(res => {
           if (res.code == 0) {
             sessionStorage.userInfo = JSON.stringify({
+              id: res.data.id,
               name: res.data.name,
               avatar: res.data.avatar,
               email: res.data.email

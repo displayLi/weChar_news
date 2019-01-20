@@ -12,12 +12,9 @@
     </div>
 
     <!-- 滚动组件 -->
-    <app-scroll ref="scrolls"> 
+    <app-scroll ref="scrolls">
       <div class="contents" v-if="newsData.length > 0">
-        <div
-          class="bg-imageBox"
-          :style="'background-image:url(' + getImgUrl+ newsData[0].imageUrl[0] + ')'"
-        ></div>
+        <div class="bg-imageBox" :style="'background-image:url('+ newsData[0].imageUrl[0] + ')'"></div>
       </div>
       <!-- 朋友圈加载图标 -->
       <i class="loading" v-show="iconFlag">
@@ -49,7 +46,6 @@
 <script>
 import Scroll from "../components/Scroll";
 import NewsList from "../components/newsList";
-import { baseUrl } from "../common/js/config";
 import Header from "../components/Header";
 export default {
   name: "moments",
@@ -57,10 +53,10 @@ export default {
     return {
       newsData: [],
       userInfo: {},
-      page:2,
-      size:3,
-      flag:true,
-      iconFlag:false
+      page: 2,
+      size: 3,
+      flag: true,
+      iconFlag: false
     };
   },
   methods: {
@@ -75,25 +71,24 @@ export default {
     getInterface() {
       this.$axios("/news/downRefresh").then(res => {
         if (res.code == 0) {
-
           setTimeout(() => {
             this.$refs.scrolls.$data.LoadFlag = {
-              isLoading:false,
-              loadingText:"下拉刷新"
-            }
+              isLoading: false,
+              loadingText: "下拉刷新"
+            };
             this.iconFlag = false;
-          },1000)
+          }, 1000);
 
-          this.page = 2
-          this.flag = true
-          this.$refs.scrolls.$data.isDone = false
+          this.page = 2;
+          this.flag = true;
+          this.$refs.scrolls.$data.isDone = false;
 
           res.data.forEach(item => {
             if (item !== null) {
               item.imageUrl = item.imageUrl.split(",");
             }
           });
-          
+
           this.newsData = res.data;
         } else {
           alert(res.msg);
@@ -101,34 +96,31 @@ export default {
       });
     },
     upgetDatas() {
-      if(this.flag){
-        this.$axios.post("/news/upLazyload",{page:this.page,size:this.size}).then(res => {
-          if (res.code == 0) {
-            let flag = false;
-            res.data.forEach(item => {
-              if (item !== null) {
-                item.imageUrl = item.imageUrl.split(",");
-                this.newsData.push(item)
-              } else {
-                this.$refs.scrolls.$data.isDone = true;
-                this.page = 2;
-                this.flag = false;
-                return ;
-              }
-            });
+      if (this.flag) {
+        this.$axios
+          .post("/news/upLazyload", { page: this.page, size: this.size })
+          .then(res => {
+            if (res.code == 0) {
+              let flag = false;
+              res.data.forEach(item => {
+                if (item !== null) {
+                  item.imageUrl = item.imageUrl.split(",");
+                  this.newsData.push(item);
+                } else {
+                  this.$refs.scrolls.$data.isDone = true;
+                  this.page = 2;
+                  this.flag = false;
+                  return;
+                }
+              });
 
-            this.$refs.scrolls.refreh();
-            this.page++
-          } else {
-            alert(res.msg);
-          }
-        });
+              this.$refs.scrolls.refreh();
+              this.page++;
+            } else {
+              alert(res.msg);
+            }
+          });
       }
-    }
-  },
-  computed: {
-    getImgUrl() {
-      return baseUrl;
     }
   },
   components: {
@@ -144,6 +136,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+
 #Moments
   width 100%
   height 100%

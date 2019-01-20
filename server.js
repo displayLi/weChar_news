@@ -31,8 +31,13 @@ app.use('/', users)
 app.use('/', upload)
 app.use('/news', news)
 
+
+// websocket
+require('./socket')
+
 // 监听服务器
-const port = 8080;
-app.listen(port, '0.0.0.0', (req, res) => {
+const port = 8088;
+app.listen(port, '0.0.0.0', err => {
+    if (err) throw err;
     console.log(`Server is runing, Address http://0.0.0.0:${port}`);
 })

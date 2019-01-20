@@ -52,6 +52,7 @@ export default {
       this.$router.push({ path: "/login" });
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("userInfo");
+      sessionStorage.removeItem("message");
     }
   },
   created() {

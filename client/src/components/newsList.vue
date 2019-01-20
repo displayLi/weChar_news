@@ -14,11 +14,7 @@
         <div class="news-image clearfix" v-if="imageNews.length > 0">
           <ul>
             <li v-for="(item,index) in imageNews" :key="index" v-if="item">
-              <img
-                @click="$emit('click',$event.target.getAttribute('src'))"
-                :src=" baseUrl + item"
-                alt
-              >
+              <img @click="$emit('click',$event.target.getAttribute('src'))" :src="item" alt>
             </li>
           </ul>
         </div>
@@ -64,7 +60,6 @@
 </template>
 
 <script>
-import { baseUrl } from "../common/js/config";
 export default {
   name: "newsList",
   props: {
@@ -84,9 +79,7 @@ export default {
     timer: String
   },
   data() {
-    return {
-      baseUrl: baseUrl
-    };
+    return {};
   },
   computed: {
     getTimer() {

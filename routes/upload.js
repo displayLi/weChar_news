@@ -28,10 +28,9 @@ const upload = multer({ storage });
 router.post('/upload', passport.authenticate('jwt', { session: false }), upload.array('file', 9), (req, res) => {
     console.log(req.url);
     let fileItem = '';
-
     // 遍历添加图片路径
     for (let i = 0; i < req.files.length; i++) {
-        fileItem += '/public/' + req.files[i].originalname + ",";
+        fileItem += '//' + req.headers.host + '/public/' + req.files[i].originalname + ",";
     }
 
     fileItem = fileItem.substring(fileItem.lastIndexOf(','), -1);
