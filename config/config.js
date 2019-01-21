@@ -1,7 +1,7 @@
 const url = {
     host: 'localhost',
     user: 'root',
-    password: 'Lizhuang5211314..',
+    password: 'lizhuang5211314',
     database: 'wechar_news'
 }
 

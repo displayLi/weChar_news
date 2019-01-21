@@ -57,10 +57,11 @@ export default {
       Socket.init(
         config,
         message => {
+          let messages = JSON.parse(message)
           this.msgList.push({
             targetId: this.userDetail.id,
             selfId: this.userInfo.id,
-            msg: JSON.parse(message).msg,
+            msg: messages.msg,
             type: "other",
             avatar: this.userDetail.avatar
           });
@@ -101,12 +102,15 @@ export default {
   },
   mounted() {
     this.$nextTick(_ => {
-      let storage = JSON.parse(sessionStorage.message);
-      if (this.userDetail.id == storage[0].targetId) {
-        this.msgList = JSON.parse(sessionStorage.message);
-      } else {
-        this.msgList = [];
+      if (sessionStorage.message) {
+        let storage = JSON.parse(sessionStorage.message);
+        if (this.userDetail.id == storage[0].targetId) {
+          this.msgList = storage;
+        } else {
+          this.msgList = [];
+        }
       }
+      
     });
   },
   created() {

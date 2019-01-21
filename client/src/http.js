@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from './router'
 
-axios.defaults.baseURL = 'http://api.link97.com:8088';
+axios.defaults.baseURL = 'http://localhost:8088';
 
 // http request 拦截器
 axios.interceptors.request.use(
