@@ -23,7 +23,7 @@
 >  View Demo
 
 ![avatar](./source/1.png)
-![avatar](./source/2.png)
+![avatar](./source/2.jpg)
 ![avatar](./source/3.png)
 ![avatar](./source/4.png)
 ![avatar](./source/5.png)
