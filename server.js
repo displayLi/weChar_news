@@ -36,7 +36,7 @@ app.use('/news', news)
 require('./socket')
 
 // 监听服务器
-const port = 8088;
+const port = 8083;
 app.listen(port, '0.0.0.0', err => {
     if (err) throw err;
     console.log(`Server is runing, Address http://0.0.0.0:${port}`);

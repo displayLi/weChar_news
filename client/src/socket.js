@@ -2,7 +2,7 @@ export default {
     ws: null,
     init(config, onMessage, onError) {
         if (!this.ws) {
-            this.ws = new WebSocket(`ws://localhost:8089/${config}`);
+            this.ws = new WebSocket(`ws://localhost:5001/${config}`);
         }
         this.ws.onmessage = event => onMessage(event.data)
 
